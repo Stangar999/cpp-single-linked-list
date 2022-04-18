@@ -30,3 +30,7 @@
 *.exe
 *.out
 *.app
+
+
+build-single-linked-list-Desktop_Qt_5_12_1_MinGW_64_bit-Debug/
+*.user
