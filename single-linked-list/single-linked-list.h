@@ -139,28 +139,13 @@ public:
     }
 
     SingleLinkedList(std::initializer_list<Type> values) : SingleLinkedList() {
-        assi(values.begin(), values.end());
+        Assign(values.begin(), values.end());
         size_ = values.size();
     }
 
     SingleLinkedList(const SingleLinkedList& other) {
-        assi(other.begin(), other.end());
+        Assign(other.begin(), other.end());
         size_ = other.GetSize();
-    }
-
-    template < typename InputIt >
-    void assi( InputIt first, InputIt last ){
-        SingleLinkedList<Type> tmp;
-        try {
-            Node* curNode = &tmp.head_;
-            for(InputIt it = first; it != last; ++it){
-                curNode->next_node = new Node(*it, curNode->next_node);
-                curNode = curNode->next_node;
-            }
-        } catch (...) {
-            throw;
-        }
-        this->swap(tmp);
     }
 
     SingleLinkedList& operator=(const SingleLinkedList& rhs) {
@@ -319,6 +304,21 @@ private:
     Node head_;
     size_t size_;
     Node* ptr_head = &head_;
+
+    template < typename InputIt >
+    void Assign( InputIt first, InputIt last ){
+        SingleLinkedList<Type> tmp;
+        try {
+            Node* curNode = &tmp.head_;
+            for(InputIt it = first; it != last; ++it){
+                curNode->next_node = new Node(*it, curNode->next_node);
+                curNode = curNode->next_node;
+            }
+        } catch (...) {
+            throw;
+        }
+        this->swap(tmp);
+    }
 };
 
 template <typename Type>
